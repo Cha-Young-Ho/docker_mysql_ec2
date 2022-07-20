@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: j211
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysqlDB:3306/anonymous_board?serverTimezone=UTC&characterEncoding=UTF-8
+    username: user01
+    password: user01
+
+logging:
+  level:
+    root: info
+    com.psc: debug

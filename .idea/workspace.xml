@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98475b9d-18c4-41d8-bb51-43f97b712696" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/000_SET_ENV" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/001_DOCKER_NETWORK.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/002_DB_RUN.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/003_1_APP_BUILD.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/003_2_APP_IMAGE.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/003_3_APP_RUN.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/004_1_WEB_CONFIG.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/004_2_WEB_IMAGE.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/004_3_WEB_RUN.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/111_START_ALL.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/999_DELETE_ALL.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/default-template.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_docker/default.conf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

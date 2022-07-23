@@ -71,4 +71,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_REPO }}/cicd:latest
             docker tag ${{ secrets.DOCKER_REPO }}/cicd:latest app
             docker stop server
-            docker run -d --rm --name server -p 8080:8080 app
+            docker run -d --rm --name app -p 8080:8080 app

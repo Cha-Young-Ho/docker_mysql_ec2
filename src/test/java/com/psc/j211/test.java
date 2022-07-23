@@ -11,7 +11,7 @@ public class test {
     @Test
     @DisplayName("git action 테스트")
     public void gitActionTest(){
-        log.info("테스트 실행되었음");
+        log.info("테스트 실행되었음2");
     }
 
 }

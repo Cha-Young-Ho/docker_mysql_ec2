@@ -12,7 +12,7 @@ services:
     ports:
       - 3306:3306
     networks:
-      - j211_net
+      - backend_net
 
   app:
     build: .
@@ -22,11 +22,11 @@ services:
     depends_on:
       - mysqlDB
     networks:
-      - j211_net
+      - backend_net
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqlDB:3306/anonymous_board?serverTimezone=UTC&characterEncoding=UTF-8
       SPRING_DATASOURCE_USERNAME: user01
       SPRING_DATASOURCE_PASSWORD: user01
 
 networks:
-  j211_net:
+  backend_net:

@@ -2,7 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-
+	//sonarqube
+	id 'org.sonarqube' version '3.3'
 	//jacoco
 	id 'jacoco'
 }
@@ -50,6 +51,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//sonarqube
+	implementation 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3'
 	//test - lombok
 	testCompileOnly 'org.projectlombok:lombok:1.18.12'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
@@ -80,7 +83,18 @@ jacocoTestCoverageVerification {
 		}
 	}
 }
-
+sonarqube {
+	properties {
+		property "sonar.host.url", "http://localhost:9000"
+		property "sonar.login", "aeef8596f50ad4a53192a4054cabf26a608e5f13"
+		property "sonar.sources", "src"
+		property "sonar.language", "java"
+		property "sonar.sourceEncoding", "UTF-8"
+		property "sonar.profile", "Sonar way"
+		property "sonar.test.inclusions", "**/*Test.java"
+		property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+	}
+}
 tasks.named('test') {
 	useJUnitPlatform()
 	finalizedBy 'jacocoTestReport'

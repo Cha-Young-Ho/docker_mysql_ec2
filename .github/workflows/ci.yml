@@ -64,9 +64,9 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.AWS_HOST }}
+          host: ${{ secrets.AWS_HOST }} # EC2 인스턴스 퍼블릭 DNS
           username: ubuntu
-          key: ${{ secrets.AWS_SSH_KEY }}
+          key: ${{ secrets.AWS_SSH_KEY }} # pem 키
           script: |
             docker pull ${{ secrets.DOCKER_REPO }}/cicd:latest
             docker tag app ${{ secrets.DOCKER_REPO }}/cicd:latest

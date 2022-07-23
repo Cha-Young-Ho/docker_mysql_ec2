@@ -25,7 +25,21 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      
+       ## create application-database.yaml
+      - name: make application-database.yaml
+        run: |
+          # create application-database.yaml
+           cd ./src/main/resources
 
+          # application-database.yaml 파일 생성
+           touch ./application-database.yaml
+
+          # GitHub-Actions 에서 설정한 값을 application-database.yaml 파일에 쓰기
+          echo "${{ secrets.DATABASE }}" >> ./application-database.yaml
+        shell: bash
+      
+      
       - name: Build with Gradle # 실제 application build(-x 옵션을 통해 test는 제외)
         run: ./gradlew build -x test
 
@@ -37,26 +51,25 @@ jobs:
         if: ${{ always() }} # test가 실패해도 report를 남기기 위해 설정
         with:
           files: build/test-results/**/*.xml
-        ## docker build & push to develop
-      - name: Docker build & push to dev
-        if: contains(github.ref, 'develop')
+          
+          
+      # 배포 Job
+      - name: Docker build
         run: |
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker build -f Dockerfile-dev -t ${{ secrets.DOCKER_REPO }}/dotoriham-dev .
-            docker push ${{ secrets.DOCKER_REPO }}/dotoriham-dev
-
-        ## deploy to production
-      - name: Deploy to prod
+          docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t app .
+          docker tag app ${{ secrets.DOCKER_REPO }}/cicd
+          docker push ${{ secrets.DOCKER_REPO }}/cicd
+          
+      - name: Deploy
         uses: appleboy/ssh-action@master
-        id: deploy-prod
-        if: contains(github.ref, 'main')
         with:
-            host: ${{ secrets.HOST_PROD }}
-            username: ec2-user
-            key: ${{ secrets.PRIVATE_KEY }}
-            envs: GITHUB_SHA
-            script: |
-                sudo docker rm -f $(docker ps -qa)
-                sudo docker pull ${{ secrets.DOCKER_REPO }}/dotoriham-prod
-                docker-compose up -d
-                docker image prune -f
+          host: ${{ secrets.AWS_HOST }}
+          username: ec2-user
+          key: ${{ secrets.AWS_SSH_KEY}}
+          envs: GITHUB_SHA
+          script: |
+            docker pull ${{ secrets.DOCKER_REPO }}/app:latest
+            docker tag ${{ secrets.DOCKER_REPO }}/app:latest app
+            docker stop server
+            docker run -d --rm --name server -p 8080:8080 app

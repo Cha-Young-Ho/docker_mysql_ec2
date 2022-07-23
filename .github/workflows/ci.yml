@@ -69,6 +69,6 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_REPO }}/cicd:latest
-            docker tag ${{ secrets.DOCKER_REPO }}/cicd:latest app
+            docker tag app ${{ secrets.DOCKER_REPO }}/cicd:latest
             docker stop server
             docker run -d --rm --name app -p 8080:8080 app

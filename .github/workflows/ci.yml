@@ -71,7 +71,10 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }} # pem 키--
           # 도커 작업
           script: |
-            docker pull ${{ secrets.DOCKER_REPO }}/cicd:latest
-            docker tag app ${{ secrets.DOCKER_REPO }}/cicd:latest
+            docker pull ${{ secrets.DOCKER_ID }}/cicd:latest
+            docker tag app ${{ secrets.DOCKER_ID }}/cicd:latest
             docker stop server
-            docker run -d --rm --name app -p 8080:8080 app
+            docker network create -d bridge test
+            docker run -d --network test --network-alias mysql -v  /build/DB/mysql:/var/lib/mysql --name mysqlDB -e MYSQL_DATABASE=anonymous_board -e MYSQL_USER=user01 -e MYSQL_PASSWORD=user01 -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 mysql
+
+            docker run -d --rm --name app --network test -p 8080:8080 app

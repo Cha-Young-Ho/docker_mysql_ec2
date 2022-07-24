@@ -54,13 +54,15 @@ jobs:
           
           
       # 배포 Job
+      # 도커허브 push
       - name: Docker build
         run: |
           docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t app .
           docker tag app ${{ secrets.DOCKER_REPO }}/cicd
           docker push ${{ secrets.DOCKER_REPO }}/cicd
-          
+      # ec2 접속 및 도커 pull
+      # 도커 실행
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:

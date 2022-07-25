@@ -73,7 +73,9 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKER_ID }}/cicd:latest
             docker tag app ${{ secrets.DOCKER_ID }}/cicd:latest
-            docker stop server
+            docker stop app
+            docker rm app
+            docker rmi ${{ secrets.DOCKER_ID }}/cicd:latest
             docker network create -d bridge test
             docker run -d --network test --network-alias mysql -v  /build/DB/mysql:/var/lib/mysql --name mysqlDB -e MYSQL_DATABASE=anonymous_board -e MYSQL_USER=user01 -e MYSQL_PASSWORD=user01 -e MYSQL_ROOT_PASSWORD=password -p 3306:3306 mysql
 
